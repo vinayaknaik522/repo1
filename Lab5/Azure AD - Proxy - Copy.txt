@@ -1,0 +1,11 @@
+<system.net>
+        <defaultProxy>
+                       <proxy
+                        usesystemdefault="true"
+                               proxyaddress="http://192.168.90.50:8080"
+                               bypassonlocal="true"
+            />
+        </defaultProxy>
+</system.net>
+
+
