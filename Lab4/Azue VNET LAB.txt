@@ -1,0 +1,136 @@
+LAB 1
+DMZ --- FE subnet
+Prod ---- BE Subnet
+
+VNET Creation  - VNET1 10.0.0.0/16
+Subnet Creation - DMZ 10.0.1.0/24, PROD 10.0.2.0/24, DEV 10.0.3.0/24, TEST 10.0.4.0/24
+VM Deployment in DMZ subnet and PROD Subnet
+NSG creation and assign to Prod Subnet
+Block the internet(In and Out) from the NSG 
+==============================================================================================================
+
+LAB 2
+
+VNET1-IBM 192.168.1.0/24   CUS
+IBM-Subnet 192.168.1.0/24
+VM Deployment
+
+VNET2-Wipro 192.168.2.0/24  EastUS
+Wipro-Subnet 192.168.2.0/24
+VM Deployment
+
+Create the peering with VNET1 and VNET2
+
+Post peering VNET1 should ping VNET2
+
+================================================================================================================
+
+LAB 3
+We are going to deploy Azure firewall
+VNET-DMZ Creation  - VNET1 10.0.0.0/16
+Subnet Creation - ManagementSub 10.0.1.0/24, AzureFirewallSubnet 10.0.2.0/24   (Firewall I will be 10.0.2.4)
+
+Firewall Deployment
+
+VNET-Prod - 192.168.1.0/24
+Prod-Subnet 192.168.1.0/24
+1 VM Deployment ---- without public ip
+
+
+VNET-Test - 192.168.2.0/24
+Prod-Subnet 192.168.2.0/24
+1 VM Deployment ------ without public ip
+
+Vnet Peering between
+DMZ-TEST
+DMZ-Prod
+
+
+To block the incoming and outgoing internet
+NSG deployment
+In / Out rule ro deny internet
+NSG need to apply Prod-Subnet 192.168.2.0/24
+
+Route Table deployment
+Route -- name of route -- any anme
+0.0.0.0/0
+Virtul appliance 
+10.0.2.4
+
+route table need to configure with Prod-Subnet 192.168.2.0/24
+
+Testing --- 
+1) In firewall we need to create NAT rule -- RDP  
+Firewall Public IP to VM private IP with 5001 port
+
+2)Application rule
+to allow google.com/ rediff.com ////// /// 
+=================================================================================================================================================================
+
+
+Azure Site to Site VPN between 2 Diff Azure Account and diff subscription
+
+subscription1 And Account1
+RG -- DC1 -- Any --   -- CUS
+
+DMZ-VNET  -- 10.0.0.0/16
+MGMT-Subnet -- 10.0.1.0/24   ---- VM 
+GatewaySubnet -- 10.0.2.0/24   -- Gateway Deployment
+
+
+
+subscription2 And Account2
+RG -- DC1 -- Any --   CUS
+
+DMZ-VNET  -- 192.168.0.0/16
+MGMT-Subnet -- 192.168.1.0/24   ---- VM 
+GatewaySubnet -- 192.168.2.0/24   -- Gateway Deployment
+
+
+Connection creation -- between Gateway1 and Gateway2
+
+Connection 1 public ip of next gateway2 and local network
+
+Connection 2 public ip of next gateway1 and local network
+
+==========================================================================================================================
+
+Site One  10.0.0.0/16  ---- i can access my next hop - 192.168.0.0/16
+
+We wanted to access other vnet form next hop Subnet - 172.0.1.0/24    -- VM
+------------------------------------------------------------------------------
+
+Azure Site to Site VPN between 2 Diff Azure Account and diff subscription
+
+subscription1 And Account1
+RG -- DC1 -- Any --   -- CUS
+
+DMZ-VNET  -- 10.0.0.0/16
+MGMT-Subnet -- 10.0.1.0/24   ---- VM 
+GatewaySubnet -- 10.0.2.0/24   -- Gateway Deployment
+
+
+
+subscription2 And Account2
+RG -- DC1 -- Any --   CUS
+
+DMZ-VNET  -- 192.168.0.0/16
+MGMT-Subnet -- 192.168.1.0/24   ---- VM 
+GatewaySubnet -- 192.168.2.0/24   -- Gateway Deployment
+
+VNET- 172.0.1.0/24
+Subnet - 172.0.1.0/24    -- VM
+
+
+
+Connection creation -- between Gateway1 and Gateway2
+
+Connection 1 public ip of next gateway2 and local network
+
+Connection 2 public ip of next gateway1 and local network
+
+
+
+
+
+
